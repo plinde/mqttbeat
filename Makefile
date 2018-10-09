@@ -50,3 +50,27 @@ collect:
 .PHONY: update-deps
 update-deps:
 	glide update --strip-vcs
+
+.PHONY: docker-all
+docker-all: docker-build docker-run
+
+.PHONY: docker-build
+docker-build:
+	cp mqttbeat.yml.plinde mqttbeat.yml && docker build -t mqttbeat:latest .
+
+.PHONY: docker-run
+docker-run:
+	docker run --rm --name mqttbeat \
+		-e mqtt_host="${mqtt_host}" \
+		-e mqtt_port="${mqtt_port}" \
+		-e mqtt_broker_url="tcp://${mqtt_host}:${mqtt_port}" \
+		-e mqtt_username="${mqtt_username}" \
+		-e mqtt_password="${mqtt_password}" \
+		-e mqtt_client="${mqtt_client}" \
+		-e mqtt_topic="${mqtt_topic}" \
+		-e ES_PROTO="${ES_PROTO}" \
+		-e ES_HOST="${ES_HOST}" \
+		-e ES_PORT="${ES_PORT}" \
+		-e ES_USER="${ES_USER}" \
+		-e ES_PASS="${ES_PASS}" \
+		mqttbeat:latest

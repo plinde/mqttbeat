@@ -9,3 +9,6 @@
 *.pyc
 
 /logs
+
+*envrc
+data

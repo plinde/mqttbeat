@@ -16,7 +16,7 @@ import (
 
 	"gopkg.in/vmihailenco/msgpack.v2"
 
-	"github.com/nathan-k-/mqttbeat/config"
+	"github.com/plinde/mqttbeat/config"
 )
 
 // Mqttbeat represent a mqtt beat object
@@ -34,7 +34,7 @@ func setupMqttClient(bt *Mqttbeat) {
 	logp.Info("BROKER url: %s", bt.beatConfig.BrokerURL)
 	mqttClientOpt.SetConnectionLostHandler(bt.reConnectHandler)
 	mqttClientOpt.SetOnConnectHandler(bt.subscribeOnConnect)
-	
+
 	if bt.beatConfig.BrokerUsername != "" && bt.beatConfig.BrokerPassword != "" {
 		logp.Info("BROKER username: %s", bt.beatConfig.BrokerUsername)
 		mqttClientOpt.SetUsername(bt.beatConfig.BrokerUsername)

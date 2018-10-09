@@ -1,4 +1,4 @@
-package: github.com/nathan-k-/mqttbeat
+package: github.com/plinde/mqttbeat
 import:
 - package: github.com/eclipse/paho.mqtt.golang
   version: ~1.0.0
